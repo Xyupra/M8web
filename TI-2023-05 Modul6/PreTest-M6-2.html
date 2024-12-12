@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menampilkan dan Menyembunyikan Gambar</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #myImage {
+            display: none; /* Awalnya gambar disembunyikan */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Contoh Menampilkan dan Menyembunyikan Gambar</h1>
+    <button id="showButton">Tampilkan Gambar</button>
+    <button id="hideButton">Sembunyikan Gambar</button>
+
+    <img id="myImage" src="A.jpg" alt="Contoh Gambar">
+
+    <script>
+        $(document).ready(function() {
+            // Menampilkan gambar saat tombol "Tampilkan Gambar" diklik
+            $('#showButton').click(function() {
+                $('#myImage').fadeIn(); // Menggunakan efek fade in
+            });
+
+            // Menyembunyikan gambar saat tombol "Sembunyikan Gambar" diklik
+            $('#hideButton').click(function() {
+                $('#myImage').fadeOut(); // Menggunakan efek fade out
+            });
+        });
+    </script>
+
+</body>
+</html>
