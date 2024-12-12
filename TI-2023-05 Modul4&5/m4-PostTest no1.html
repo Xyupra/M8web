@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perhitungan Gaji</title>
+</head>
+<body>
+    <form name="form1">
+        <label for="anak">Jumlah Anak:</label>
+        <input type="number" name="anak" size="10" maxlength="10">
+        <br>
+        <label for="gol">Golongan:</label>
+        <select name="gol">
+            <option value="I">I</option>
+            <option value="II">II</option>
+            <option value="III">III</option>
+        </select>
+        <br>
+        <input type="button" name="hitung" value="Hitung" onclick="hitungGaji()">
+        <input type="reset" name="Batal" value="Cancel">
+        <br>
+        <label for="gapok">Gaji Pokok:</label>
+        <input type="text" name="gapok" readonly>
+        <br>
+        <label for="tunjangan">Tunjangan:</label>
+        <input type="text" name="tunjangan" readonly>
+        <br>
+        <label for="gaji">Gaji Bersih:</label>
+        <input type="text" name="gaji" readonly>
+    </form>
+
+    <script>
+        function hitungGaji() {
+            // Ambil nilai dari form
+            var jumlahAnak = document.forms["form1"]["anak"].value;
+            var golongan = document.forms["form1"]["gol"].value;
+
+            // Tentukan gaji pokok berdasarkan golongan
+            var gajiPokok;
+            switch(golongan) {
+                case "I":
+                    gajiPokok = 250000;
+                    break;
+                case "II":
+                    gajiPokok = 300000;
+                    break;
+                case "III":
+                    gajiPokok = 350000;
+                    break;
+            }
+
+            // Hitung tunjangan berdasarkan persentase
+            var persentaseTunjangan;
+            switch(golongan) {
+                case "I":
+                    persentaseTunjangan = 0.05;
+                    break;
+                case "II":
+                    persentaseTunjangan = 0.1;
+                    break;
+                case "III":
+                    persentaseTunjangan = 0.15;
+                    break;
+            }
+            var tunjangan = jumlahAnak * gajiPokok * persentaseTunjangan;
+
+            // Hitung gaji bersih
+            var gajiBersih = gajiPokok + tunjangan;
+
+            // Tampilkan hasil perhitungan
+            document.forms["form1"]["gapok"].value = gajiPokok;
+            document.forms["form1"]["tunjangan"].value = tunjangan;
+            document.forms["form1"]["gaji"].value = gajiBersih;
+        }
+    </script>
+</body>
+</html>

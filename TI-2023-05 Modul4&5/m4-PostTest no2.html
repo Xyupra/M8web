@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Penjualan Barang</title>
+</head>
+<body>
+    <h2>Data Penjualan Barang</h2>
+    <form name="formPenjualan">
+        <table>
+            <tr>
+                <td>Kode Barang</td>
+                <td><select name="kodeBarang" onchange="tampilkanDetail()">
+                    <option value="">Pilih Salah Satu</option>
+                    <option value="B001">B001</option>
+                    <option value="B002">B002</option>
+                    <option value="B003">B003</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>Nama Barang</td>
+                <td><input type="text" name="namaBarang" readonly></td>
+            </tr>
+            <tr>
+                <td>Harga</td>
+                <td><input type="text" name="harga" readonly></td>
+            </tr>
+            <tr>
+                <td>Jumlah Beli</td>
+                <td><input type="number" name="jumlahBeli" oninput="hitungTotal()"></td>
+            </tr>
+            <tr>
+                <td>Jumlah Bayar</td>
+                <td><input type="text" name="jumlahBayar" readonly></td>
+            </tr>
+            <tr>
+                <td>Potongan</td>
+                <td><input type="text" name="potongan" readonly></td>
+            </tr>
+            <tr>
+                <td>Total Bayar</td>
+                <td><input type="text" name="totalBayar" readonly></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="button" onclick="tampilkanStruk()">Tampilkan</button></td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        // Data barang
+        const barang = {
+            B001: { nama: "Buku", harga: 5000 },
+            B002: { nama: "Penggaris", harga: 1500 },
+            B003: { nama: "Pulpen", harga: 2000 }
+        };
+
+        function tampilkanDetail() {
+            const kodeBarang = document.forms["formPenjualan"]["kodeBarang"].value;
+            const barangDetail = barang[kodeBarang];
+
+            document.forms["formPenjualan"]["namaBarang"].value = barangDetail.nama;
+            document.forms["formPenjualan"]["harga"].value = barangDetail.harga;
+        }
+
+        function hitungTotal() {
+            const jumlahBeli = parseInt(document.forms["formPenjualan"]["jumlahBeli"].value);
+            const harga = parseInt(document.forms["formPenjualan"]["harga"].value);
+
+            let potongan = 0;
+            if (jumlahBeli <= 10) {
+                potongan = jumlahBeli * harga * 0.05;
+            } else if (jumlahBeli <= 20) {
+                potongan = jumlahBeli * harga * 0.1;
+            } else {
+                potongan = jumlahBeli * harga * 0.15;
+            }
+
+            const jumlahBayar = jumlahBeli * harga;
+            const totalBayar = jumlahBayar - potongan;
+
+            document.forms["formPenjualan"]["jumlahBayar"].value = jumlahBayar;
+            document.forms["formPenjualan"]["potongan"].value = potongan;
+            document.forms["formPenjualan"]["totalBayar"].value = totalBayar;
+        }
+
+        function tampilkanStruk() {
+    // Get form data
+    const kodeBarang = document.forms["formPenjualan"]["kodeBarang"].value;
+    const namaBarang = document.forms["formPenjualan"]["namaBarang"].value;
+    const harga = parseInt(document.forms["formPenjualan"]["harga"].value);
+    const jumlahBeli = parseInt(document.forms["formPenjualan"]["jumlahBeli"].value);
+    const jumlahBayar = parseInt(document.forms["formPenjualan"]["jumlahBayar"].value);
+    const potongan = parseInt(document.forms["formPenjualan"]["potongan"].value);
+    const totalBayar = parseInt(document.forms["formPenjualan"]["totalBayar"].value);
+    
+    // Create a string to represent the sales slip
+    const struk = `
+        Nota Penjualan
+        Kode Barang  : ${kodeBarang}
+        Nama Barang  : ${namaBarang}
+        Harga Barang : ${harga}
+        Jumlah Beli  : ${jumlahBeli}
+        ------------------
+        Jumlah Bayar : ${jumlahBayar}
+        Potongan     : ${potongan}
+        ------------------
+        Total Bayar  : ${totalBayar}
+    `;
+
+    // Display the sales slip
+    alert(struk); // You can replace this with a more elegant display method, like creating a new HTML element
+}
+           
+        
+    </script>
+</body>
+</html>

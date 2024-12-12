@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Validasi Login</title>
+</head>
+<body>
+    <h2>Form Login</h2>
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="button" onclick="validateForm()">Login</button>
+    </form>
+    <p id="message"></p>
+
+    <script>
+        function validateForm() {
+            // Ambil nilai username dan password dari input
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Validasi apakah input kosong
+            if (username === "" || password === "") {
+                document.getElementById("message").innerHTML = "Username dan password tidak boleh kosong!";
+                return; // Hentikan eksekusi jika ada input kosong
+            }
+
+            // Simulasi validasi dengan data yang tersimpan (ganti dengan logika autentikasi Anda)
+            const users = {
+                "admin": "password123",
+                "user": "userpass"
+            };
+
+            if (users.hasOwnProperty(username) && users[username] === password) {
+                document.getElementById("message").innerHTML = "Login berhasil!";
+            } else {
+                document.getElementById("message").innerHTML = "Username atau password salah!";
+            }
+        }
+    </script>
+</body>
+</html>
